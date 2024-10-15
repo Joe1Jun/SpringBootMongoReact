@@ -1,27 +1,32 @@
 package com.joejunker.movies;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-//This annotation is used to tell Spring Boot that the class is a RESTful controller. It indicates that this class
-//will handle HTTP requests and responses in a REST API.
+import java.util.List;
+
+
+/// This annotation marks the class as a Spring REST controller.
+//It allows the class to handle HTTP requests and return responses.
 @RestController
-//This annotation maps HTTP requests to specific methods or classes. In this case, it's mapping all routes that start with /api/v1/movies to this controller. Any endpoint 
-//defined inside this class will have /api/v1/movies as the base URL.
-@RequestMapping("/api/v1/movies")
-
+@RequestMapping("/api/v1/movies") // This specifies the base URI for all requests handled by this controller.
 public class MovieController {
-	
-	@GetMapping
-	//ResponseEntity is used to have control over the HTTP response body 
-	//and status code, similar to how you handle responses in Node.js with res.status().send().
-      public ResponseEntity<String> getAllMovies () {
-		
-		return new ResponseEntity<String>("All Movies", HttpStatus.OK);
-		
-	}
 
+ // This annotation automatically injects the MovieService bean into this controller.
+ @Autowired
+ private MovieService service;
+
+ // This method handles GET requests to the /api/v1/movies endpoint.
+ @GetMapping
+ public ResponseEntity<List<Movie>> getMovies() {
+     // Calls the service to retrieve the list of all movies.
+     // The service layer typically handles business logic and data retrieval.
+     
+     List<Movie> movies = service.findAllMovies();
+
+     // Returns a ResponseEntity containing the list of movies with an HTTP status of OK (200).
+     return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+ }
 }

@@ -1,46 +1,42 @@
 package com.joejunker.movies;
 
-import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-// This is the same as using @Entity for relational databases
-// We have to clarify the collection name here as with noSql there is no table
-// automatically created from the class object just a collection object 
+//This defines this class as the model for the collection called movies. Basically sets this as the template for the collection objects
 @Document(collection = "movies")
-//This generated all getters and setters for all non final instance variables
-// Also creates toString method hashcode and equals methods for all instance variables
+//Lombok : this generates to string and getters and setters automatically 
 @Data
-//@AllArgsConstructor: Generates a constructor like public Movie(String id, String title, String director).
+// Creates a constructor automatically
 @AllArgsConstructor
-//@NoArgsConstructor: Generates a no-argument constructor like public Movie().
+// Creates a no argument constructor automatically
 @NoArgsConstructor
 public class Movie {
+	//This annotation sets the instacne variable below it as the unique identifier for the objects in this class 
+    @Id
+    private ObjectId id;
+    private String imdbId;
+    private String title;
+    private String releaseDate;
+    private String trailerLink;
+    private String poster;
+    private List<String> backdrops;
+    private List<String> genres;
+    //This annotation sets the instance variable below it as a refernce usually in the frm of a unique id such as object ID
+    //This id is crated in the class of the object specified in the list . Here this is the Review object
+    @DocumentReference
+    private List<Review> reviews;
 	
-	@Id
-	//This id annotation when placed above a variable indicates that this is the unique 
-	// identifier for each movie object
-	private Object id;
-	private String imbdId;
-	private String title;
-	private String releaseDate;
-	private String trailerLink;
-	private String poster;
-	private List<String> genres;
-	private List <String> backdrops;
-	
-	// This annotation will create ids or refernces to the reviews and the reviews will be 
-	// stored in a separate collection
-	@DocumentReference
-	private List<Review> reviewIds;
-	
-	
-	
+    
+    
+    
 
+    
 }
