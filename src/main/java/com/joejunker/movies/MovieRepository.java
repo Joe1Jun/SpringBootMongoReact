@@ -1,5 +1,7 @@
 package com.joejunker.movies;
 
+import java.util.Optional;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -20,4 +22,9 @@ public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
     // - Finding entities by their ID
     // - Finding all entities
     // Additional custom query methods can be defined here if needed.
+	
+	
+	Optional<Movie> findMovieByImdbId(String imbdId);
+	
+	
 }
