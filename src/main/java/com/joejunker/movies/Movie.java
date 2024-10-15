@@ -29,10 +29,10 @@ public class Movie {
     private String poster;
     private List<String> backdrops;
     private List<String> genres;
-    //This annotation sets the instance variable below it as a refernce usually in the frm of a unique id such as object ID
-    //This id is crated in the class of the object specified in the list . Here this is the Review object
+    //This annotation sets the instance variable below it as a reference usually in the from of a unique id such as object ID
+    //This id is created in the class of the object specified in the list . Here this is the Review object
     @DocumentReference
-    private List<Review> reviews;
+    private List<Review> reviewIds;
 	
     
     
