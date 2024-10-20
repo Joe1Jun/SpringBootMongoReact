@@ -1,5 +1,5 @@
 import React from "react";
-
+import Hero from "../hero/Hero";
 
 const Home = ({movies}) => {
 
@@ -7,7 +7,7 @@ const Home = ({movies}) => {
  return (
     <div>
 
-        Welcome !!!
+      <Hero movies={movies} />
     </div>
 
 
