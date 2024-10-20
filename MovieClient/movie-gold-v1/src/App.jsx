@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import './App.css';
+import api from './api/axiosConfig';
+import { useState, useEffect } from 'react';
+import Layout from './Components/Layout';
+import {Routes, Route} from 'react-router-dom';
 function App() {
-  const [count, setCount] = useState(0)
+  //useState to update and the movies 
+  //When setmovies is called it resets the variable movies.
+
+  const [movies, setMovies] = useState([]); // Initialize as an empty array
+
+  const getMovies = async () => {
+    try {
+      const response = await api.get('/api/v1/movies'); // Ensure correct endpoint
+      console.log(response.data);
+      setMovies(response.data); // Update state with fetched data
+    } catch (err) {
+      console.error(err); // Use console.error for errors
+    }
+  };
+
+  //This calls the getMovies function that sets the movies variable
+  // with setMovies to effectivelydisplay all the movies on mount of the component.
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className='App'>
+      
+    </div>
+  );
 }
 
-export default App
+export default App;
