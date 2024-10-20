@@ -33,7 +33,12 @@
     width:100%;
 }
 
+.move-title{
+    color: white;
+    display: flex;
+    align-items: center;
 
+}
 
 
 
