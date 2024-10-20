@@ -5,7 +5,8 @@ import axios from "axios";
 //You can also just use axios directly if no special configuration is needed.
 
 export default axios.create({
-    //Sets a base Url to be used
+    //Sets a base Url to be used by th client 
+    // We can add out end points to thia 
        baseURL: 'http://localhost:8080',
        headers: {"ngrok-skip-browser-warning" : "true"}
 
